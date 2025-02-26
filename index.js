@@ -15,6 +15,15 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.use((req, res, next) => {
+  res.setHeader(
+      "Content-Security-Policy",
+      "script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline';"
+  );
+  next();
+});
+
+
 
 // Conexión a la base de datos con mysql2
 /*const connection = mysql.createPool({
