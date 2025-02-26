@@ -17,13 +17,24 @@ app.get('/', (req, res) => {
 
 
 // Conexión a la base de datos con mysql2
-const connection = mysql.createPool({
+/*const connection = mysql.createPool({
   host: 'localhost',
   user: 'root',        
   password: '',        
   database: 'bdempleados',
   waitForConnections: true,
   connectionLimit: 10,
+  queueLimit: 0
+});
+*/
+
+const connection = mysql.createPool({
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || 'bdempleados',
+  waitForConnections: true,
+  connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT, 10) || 10,
   queueLimit: 0
 });
 
