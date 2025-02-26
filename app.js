@@ -7,7 +7,7 @@ document.getElementById('formEmpleado').addEventListener('submit', async (e) => 
     const data = { nombre, email, puesto };
   
     try {
-      const response = await fetch('empleados-production.up.railway.app/register', {
+      const response = await fetch('https://empleados-production.up.railway.app/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
