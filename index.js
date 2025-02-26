@@ -1,4 +1,3 @@
-
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -8,39 +7,24 @@ const app = express();
 app.use(express.json());  
 app.use(cors()); 
 
-
+// ✅ Configurar CSP ANTES de servir archivos estáticos
 app.use((req, res, next) => {
-  res.setHeader(
-      "Content-Security-Policy",
-      "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js;"
-  );
-  next();
+    res.setHeader(
+        "Content-Security-Policy",
+        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;"
+    );
+    next();
 });
 
-
+// ✅ Servir archivos estáticos
 app.use(express.static(__dirname));
 
-// Ruta de fallback para servir index.html
+// ✅ Ruta principal
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-
-
-
-
-// Conexión a la base de datos con mysql2
-/*const connection = mysql.createPool({
-  host: 'localhost',
-  user: 'root',        
-  password: '',        
-  database: 'bdempleados',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-});
-*/
-
+// ✅ Conexión a la base de datos
 const connection = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
@@ -60,7 +44,7 @@ connection.getConnection((err, conn) => {
   conn.release();
 });
 
-// Ruta de registro de empleados
+// ✅ CORRECCIÓN: Ruta de registro de empleados
 app.post('/register', (req, res) => {
   const { nombre, email, puesto } = req.body;
 
@@ -78,7 +62,7 @@ app.post('/register', (req, res) => {
   });
 });
 
-// Inicia el servidor
+// ✅ Corrección del puerto para producción
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
