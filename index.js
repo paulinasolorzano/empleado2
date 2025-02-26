@@ -18,10 +18,11 @@ app.get('/', (req, res) => {
 app.use((req, res, next) => {
   res.setHeader(
       "Content-Security-Policy",
-      "script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline';"
+      "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js;"
   );
   next();
 });
+
 
 
 
