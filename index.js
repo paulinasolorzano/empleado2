@@ -57,7 +57,7 @@ connection.getConnection((err, conn) => {
 });
 
 // Ruta de registro de empleados
-app.post('/register', (req, res) => {
+app.post('./register', (req, res) => {
   const { nombre, email, puesto } = req.body;
 
   if (!nombre || !email || !puesto) {
