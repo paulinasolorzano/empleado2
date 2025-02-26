@@ -76,7 +76,7 @@ app.post('./register', (req, res) => {
 });
 
 // Inicia el servidor
-const PORT = 3000;
+const PORT = 8080;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
